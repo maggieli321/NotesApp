@@ -12,7 +12,7 @@ import UIKit
 class ListNotesTableViewController: UITableViewController {
 
     
-    var notes = [Note]() {
+    var notes: Results<Note>! {
         didSet {
             tableView.reloadData()
         }
@@ -47,6 +47,7 @@ class ListNotesTableViewController: UITableViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
+    notes = Realmhelper.retrieveNotes()
   }
     
     // how many cells should it display? Usually set dynamically but hardcoded for now
@@ -104,12 +105,15 @@ class ListNotesTableViewController: UITableViewController {
     }
     
     
-    // allow table view to have additional editing modes
+    // allow table view to have additional editing modes, like DELETE
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            notes.removeAtIndex(indexPath.row)
-            // updated so need to update itself
-            tableView.reloadData()
+            // delete note from Realm using
+            Realmhelper.deleteNote(notes[indexPath.row])
+            notes = Realmhelper.retrieveNotes()
+//            notes.removeAtIndex(indexPath.row)
+//            // updated so need to update itself
+//            tableView.reloadData()
         }
     }
   

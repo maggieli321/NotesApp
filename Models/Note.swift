@@ -6,10 +6,20 @@
 //  Copyright © 2016 MakeSchool. All rights reserved.
 //
 
-import Foundation
+// prev
+//import Foundation
+//
+//class Note {
+//    var title = ""
+//    var content = ""
+//    var modificationTime = NSDate()
+//}
 
-class Note {
-    var title = ""
-    var content = ""
-    var modificationTime = NSDate()
+import Foundation
+import RealmSwift
+
+class Note: Object {
+    dynamic var title = ""
+    dynamic var content = ""
+    dynamic var modificationTime = NSDate()
 }

@@ -49,21 +49,23 @@ class DisplayNoteViewController: UIViewController {
         let listNotesTableViewController = segue.destinationViewController as! ListNotesTableViewController
         if segue.identifier == "Save" {
             if let note = note {
+                let newNote = Note()
                 // if existing note, just update
-                note.title = noteTitleTextField.text ?? ""
-                note.content = noteContentTextView.text ?? ""
+                newNote.title = noteTitleTextField.text ?? ""
+                newNote.content = noteContentTextView.text ?? ""
+                Realmhelper.updateNote(note, newNote: newNote)
                 //reload data so edits are reflected
-                listNotesTableViewController.tableView.reloadData()
+//                listNotesTableViewController.tableView.reloadData()
             } else {
                 // if new note, create new note and add to notes array
                 // dont have to refresh because didSet property observer does it
-                let newNote = Note()
-                newNote.title = noteTitleTextField.text ?? ""
-                newNote.content = noteContentTextView.text ?? ""
-                newNote.modificationTime = NSDate()
-                listNotesTableViewController.notes.append(newNote)
-                
+                let note = Note()
+                note.title = noteTitleTextField.text ?? ""
+                note.content = noteContentTextView.text ?? ""
+                note.modificationTime = NSDate()
+                Realmhelper.addNote(note)
             }
+            listNotesTableViewController.notes = Realmhelper.retrieveNotes()
         }
     }
 //prev code
