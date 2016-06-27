@@ -14,4 +14,5 @@ class ListNotesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var noteModificationTimeLabel: UILabel!
 
+    @IBOutlet weak var notePreviewLabel: UILabel!
 }

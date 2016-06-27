@@ -73,6 +73,7 @@ class ListNotesTableViewController: UITableViewController {
         
         // set the text to the title of the note
         cell.noteTitleLabel.text = note.title
+        cell.notePreviewLabel.text = note.content
         
         //coverting time of note to string
         // set text property to be the modified time
